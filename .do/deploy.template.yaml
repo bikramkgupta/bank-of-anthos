@@ -60,13 +60,13 @@ services:
     instance_size_slug: basic-xxs
     envs:
       - key: POSTGRES_HOST
-        value: ${accountsdb.HOST}
+        value: ${accountsdb.HOSTNAME}
         scope: RUN_TIME
       - key: POSTGRES_PORT
         value: ${accountsdb.PORT}
         scope: RUN_TIME
       - key: POSTGRES_USER
-        value: ${accountsdb.USER}
+        value: ${accountsdb.USERNAME}
         scope: RUN_TIME
       - key: POSTGRES_PASSWORD
         value: ${accountsdb.PASSWORD}
@@ -75,7 +75,7 @@ services:
         value: ${ACCOUNTS_DB_NAME}
         scope: RUN_TIME
       - key: ACCOUNTS_DB_URI
-        value: postgresql://${accountsdb.USER}:${accountsdb.PASSWORD}@${accountsdb.HOST}:${accountsdb.PORT}/${ACCOUNTS_DB_NAME}?sslmode=require
+        value: postgresql://${accountsdb.USERNAME}:${accountsdb.PASSWORD}@${accountsdb.HOSTNAME}:${accountsdb.PORT}/${ACCOUNTS_DB_NAME}?sslmode=require
         scope: RUN_TIME
       - key: USE_DEMO_DATA
         value: "true"
@@ -115,13 +115,13 @@ services:
     instance_size_slug: basic-xxs
     envs:
       - key: POSTGRES_HOST
-        value: ${accountsdb.HOST}
+        value: ${accountsdb.HOSTNAME}
         scope: RUN_TIME
       - key: POSTGRES_PORT
         value: ${accountsdb.PORT}
         scope: RUN_TIME
       - key: POSTGRES_USER
-        value: ${accountsdb.USER}
+        value: ${accountsdb.USERNAME}
         scope: RUN_TIME
       - key: POSTGRES_PASSWORD
         value: ${accountsdb.PASSWORD}
@@ -130,7 +130,7 @@ services:
         value: ${ACCOUNTS_DB_NAME}
         scope: RUN_TIME
       - key: ACCOUNTS_DB_URI
-        value: postgresql://${accountsdb.USER}:${accountsdb.PASSWORD}@${accountsdb.HOST}:${accountsdb.PORT}/${ACCOUNTS_DB_NAME}?sslmode=require
+        value: postgresql://${accountsdb.USERNAME}:${accountsdb.PASSWORD}@${accountsdb.HOSTNAME}:${accountsdb.PORT}/${ACCOUNTS_DB_NAME}?sslmode=require
         scope: RUN_TIME
       - key: USE_DEMO_DATA
         value: "true"
@@ -163,13 +163,13 @@ services:
     instance_size_slug: basic-xxs
     envs:
       - key: POSTGRES_HOST
-        value: ${ledgerdb.HOST}
+        value: ${ledgerdb.HOSTNAME}
         scope: RUN_TIME
       - key: POSTGRES_PORT
         value: ${ledgerdb.PORT}
         scope: RUN_TIME
       - key: POSTGRES_USER
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: POSTGRES_PASSWORD
         value: ${ledgerdb.PASSWORD}
@@ -178,10 +178,10 @@ services:
         value: ${LEDGER_DB_NAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://${ledgerdb.HOST}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
+        value: jdbc:postgresql://${ledgerdb.HOSTNAME}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_USERNAME
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
@@ -217,13 +217,13 @@ services:
     instance_size_slug: basic-xxs
     envs:
       - key: POSTGRES_HOST
-        value: ${ledgerdb.HOST}
+        value: ${ledgerdb.HOSTNAME}
         scope: RUN_TIME
       - key: POSTGRES_PORT
         value: ${ledgerdb.PORT}
         scope: RUN_TIME
       - key: POSTGRES_USER
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: POSTGRES_PASSWORD
         value: ${ledgerdb.PASSWORD}
@@ -232,10 +232,10 @@ services:
         value: ${LEDGER_DB_NAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://${ledgerdb.HOST}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
+        value: jdbc:postgresql://${ledgerdb.HOSTNAME}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_USERNAME
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
@@ -268,13 +268,13 @@ services:
     instance_size_slug: basic-xxs
     envs:
       - key: POSTGRES_HOST
-        value: ${ledgerdb.HOST}
+        value: ${ledgerdb.HOSTNAME}
         scope: RUN_TIME
       - key: POSTGRES_PORT
         value: ${ledgerdb.PORT}
         scope: RUN_TIME
       - key: POSTGRES_USER
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: POSTGRES_PASSWORD
         value: ${ledgerdb.PASSWORD}
@@ -283,10 +283,10 @@ services:
         value: ${LEDGER_DB_NAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://${ledgerdb.HOST}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
+        value: jdbc:postgresql://${ledgerdb.HOSTNAME}:${ledgerdb.PORT}/${LEDGER_DB_NAME}?sslmode=require
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_USERNAME
-        value: ${ledgerdb.USER}
+        value: ${ledgerdb.USERNAME}
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
