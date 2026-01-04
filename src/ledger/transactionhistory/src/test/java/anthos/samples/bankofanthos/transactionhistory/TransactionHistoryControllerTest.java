@@ -69,7 +69,6 @@ class TransactionHistoryControllerTest {
     private static final String NON_AUTHED_ACCOUNT_NUM = "9876543210";
     private static final String BEARER_TOKEN = "Bearer abc";
     private static final String TOKEN = "abc";
-    private static final String PUBLIC_KEY_PATH = "path/";
 
     @BeforeEach
     void setUp() {
@@ -93,8 +92,13 @@ class TransactionHistoryControllerTest {
         }, clock);
 
         when(cache.stats()).thenReturn(stats);
-        transactionHistoryController = new TransactionHistoryController(ledgerReader,
-            meterRegistry, verifier, PUBLIC_KEY_PATH, cache, LOCAL_ROUTING_NUM, VERSION);
+        transactionHistoryController = new TransactionHistoryController(
+            ledgerReader,
+            meterRegistry,
+            verifier,
+            cache,
+            LOCAL_ROUTING_NUM,
+            VERSION);
 
         when(verifier.verify(TOKEN)).thenReturn(jwt);
         when(jwt.getClaim(JWT_ACCOUNT_KEY)).thenReturn(claim);
