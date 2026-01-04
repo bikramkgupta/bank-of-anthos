@@ -35,6 +35,9 @@ services:
       - key: USE_DEMO_DATA
         value: "true"
         scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
+        scope: RUN_TIME
       - key: JWT_PUBLIC_KEY
         value: ${JWT_PUBLIC_KEY}
         type: SECRET
@@ -76,6 +79,9 @@ services:
         scope: RUN_TIME
       - key: USE_DEMO_DATA
         value: "true"
+        scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
         scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
@@ -125,6 +131,9 @@ services:
         scope: RUN_TIME
       - key: USE_DEMO_DATA
         value: "true"
+        scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
         scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
@@ -180,6 +189,9 @@ services:
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
         scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
+        scope: RUN_TIME
       - key: JWT_PUBLIC_KEY
         value: ${JWT_PUBLIC_KEY}
         type: SECRET
@@ -227,6 +239,9 @@ services:
         scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
+        scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
         scope: RUN_TIME
       - key: JWT_PUBLIC_KEY
         value: ${JWT_PUBLIC_KEY}
@@ -276,6 +291,9 @@ services:
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
         scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
+        scope: RUN_TIME
       - key: JWT_PUBLIC_KEY
         value: ${JWT_PUBLIC_KEY}
         type: SECRET
@@ -302,6 +320,9 @@ workers:
         scope: RUN_TIME
       - key: USE_DEMO_DATA
         value: "true"
+        scope: RUN_TIME
+      - key: VERSION
+        value: "staging"
         scope: RUN_TIME
       - key: ENABLE_TRACING
         value: "false"
