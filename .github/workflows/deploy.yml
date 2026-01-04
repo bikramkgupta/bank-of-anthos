@@ -56,4 +56,4 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           project_id: ${{ vars.DO_PROJECT_ID }}
-          app_spec_path: .do/deploy.yaml
+          app_spec_location: .do/deploy.yaml

@@ -52,7 +52,7 @@ services:
       deploy_on_push: false
     source_dir: src/accounts/userservice
     dockerfile_path: Dockerfile
-    http_port: 8080
+    internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
@@ -101,7 +101,7 @@ services:
       deploy_on_push: false
     source_dir: src/accounts/contacts
     dockerfile_path: Dockerfile
-    http_port: 8080
+    internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
@@ -146,7 +146,7 @@ services:
       deploy_on_push: false
     source_dir: src/ledger/ledgerwriter
     dockerfile_path: Dockerfile
-    http_port: 8080
+    internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
@@ -197,7 +197,7 @@ services:
       deploy_on_push: false
     source_dir: src/ledger/balancereader
     dockerfile_path: Dockerfile
-    http_port: 8080
+    internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
@@ -245,7 +245,7 @@ services:
       deploy_on_push: false
     source_dir: src/ledger/transactionhistory
     dockerfile_path: Dockerfile
-    http_port: 8080
+    internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
@@ -328,10 +328,3 @@ databases:
     cluster_name: boa-staging-postgres
     db_name: ${LEDGER_DB_NAME}
     db_user: ledger_user
-ingress:
-  rules:
-    - component:
-        name: frontend
-      match:
-        path:
-          prefix: /
