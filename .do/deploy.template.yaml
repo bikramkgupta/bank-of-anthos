@@ -83,6 +83,9 @@ services:
       - key: VERSION
         value: "staging"
         scope: RUN_TIME
+      - key: TOKEN_EXPIRY_SECONDS
+        value: "3600"
+        scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
         scope: RUN_TIME
