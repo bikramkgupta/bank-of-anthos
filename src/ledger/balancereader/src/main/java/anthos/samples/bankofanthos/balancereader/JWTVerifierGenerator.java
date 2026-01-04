@@ -43,12 +43,21 @@ public class JWTVerifierGenerator {
 
     @Bean (name = "verifier")
     public JWTVerifier generateJWTVerifier(
-            @Value("${PUB_KEY_PATH}") final String publicKeyPath) {
+            @Value("${PUB_KEY_PATH:}") final String publicKeyPath) {
         // load public key from file
         try {
             LOGGER.debug("Generating JWT token verifier");
-            String keyStr =
-                    new String(Files.readAllBytes(Paths.get(publicKeyPath)));
+            String keyStr = System.getenv("JWT_PUBLIC_KEY");
+            if (keyStr == null || keyStr.isBlank()) {
+                if (publicKeyPath == null || publicKeyPath.isBlank()) {
+                    throw new GenerateKeyException(
+                        "JWT_PUBLIC_KEY or PUB_KEY_PATH must be set",
+                        new IllegalArgumentException("Missing JWT public key")
+                    );
+                }
+                keyStr = new String(Files.readAllBytes(Paths.get(publicKeyPath)));
+            }
+            keyStr = keyStr.replace("\\n", "\n");
             keyStr = keyStr.replaceFirst("-----BEGIN PUBLIC KEY-----", "")
                     .replaceFirst("-----END PUBLIC KEY-----", "")
                     .replaceAll("\\s", "");

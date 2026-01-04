@@ -71,7 +71,6 @@ public final class TransactionHistoryController {
     public TransactionHistoryController(LedgerReader reader,
             StackdriverMeterRegistry meterRegistry,
             JWTVerifier verifier,
-            @Value("${PUB_KEY_PATH}") final String publicKeyPath,
             LoadingCache<String, Deque<Transaction>> cache,
             @Value("${LOCAL_ROUTING_NUM}") final String localRoutingNum,
             @Value("${VERSION}") final String version) {

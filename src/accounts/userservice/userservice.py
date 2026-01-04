@@ -237,8 +237,24 @@ def create_app():
 
     app.config['VERSION'] = os.environ.get('VERSION')
     app.config['EXPIRY_SECONDS'] = int(os.environ.get('TOKEN_EXPIRY_SECONDS'))
-    app.config['PRIVATE_KEY'] = open(os.environ.get('PRIV_KEY_PATH'), 'r').read()
-    app.config['PUBLIC_KEY'] = open(os.environ.get('PUB_KEY_PATH'), 'r').read()
+    def _load_key(env_key, path_key, label):
+        key = os.getenv(env_key)
+        if key:
+            return key.replace("\\n", "\n")
+        path = os.getenv(path_key)
+        if not path:
+            raise RuntimeError(
+                f"{env_key} or {path_key} must be set for {label} key"
+            )
+        with open(path, "r") as key_file:
+            return key_file.read()
+
+    app.config['PRIVATE_KEY'] = _load_key(
+        "JWT_PRIVATE_KEY", "PRIV_KEY_PATH", "private"
+    )
+    app.config['PUBLIC_KEY'] = _load_key(
+        "JWT_PUBLIC_KEY", "PUB_KEY_PATH", "public"
+    )
 
     # Configure database connection
     try:

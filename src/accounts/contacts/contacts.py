@@ -213,7 +213,19 @@ def create_app():
     # setup global variables
     app.config["VERSION"] = os.environ.get("VERSION")
     app.config["LOCAL_ROUTING"] = os.environ.get("LOCAL_ROUTING_NUM")
-    app.config["PUBLIC_KEY"] = open(os.environ.get("PUB_KEY_PATH"), "r").read()
+    def _load_key(env_key, path_key):
+        key = os.getenv(env_key)
+        if key:
+            return key.replace("\\n", "\n")
+        path = os.getenv(path_key)
+        if not path:
+            raise RuntimeError(
+                "JWT_PUBLIC_KEY or PUB_KEY_PATH must be set for JWT validation"
+            )
+        with open(path, "r") as key_file:
+            return key_file.read()
+
+    app.config["PUBLIC_KEY"] = _load_key("JWT_PUBLIC_KEY", "PUB_KEY_PATH")
 
     # Configure database connection
     try:

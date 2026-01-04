@@ -45,11 +45,20 @@ public class TransactionHistoryApplication {
         "VERSION",
         "PORT",
         "LOCAL_ROUTING_NUM",
-        "PUB_KEY_PATH",
         "SPRING_DATASOURCE_URL",
         "SPRING_DATASOURCE_USERNAME",
         "SPRING_DATASOURCE_PASSWORD"
     };
+
+    private static void verifyJwtKeyConfig() {
+        String jwtPublicKey = System.getenv("JWT_PUBLIC_KEY");
+        String pubKeyPath = System.getenv("PUB_KEY_PATH");
+        if ((jwtPublicKey == null || jwtPublicKey.isBlank())
+                && (pubKeyPath == null || pubKeyPath.isBlank())) {
+            LOGGER.fatal("JWT_PUBLIC_KEY or PUB_KEY_PATH must be set");
+            System.exit(1);
+        }
+    }
 
     public static void main(String[] args) {
         // Check that all required environment variables are set.
@@ -61,6 +70,7 @@ public class TransactionHistoryApplication {
                 System.exit(1);
             }
         }
+        verifyJwtKeyConfig();
         SpringApplication.run(TransactionHistoryApplication.class, args);
         LOGGER.log(Level.forName("STARTUP", Level.FATAL.intLevel()),
             String.format("Started TransactionHistory service. "

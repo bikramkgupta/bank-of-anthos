@@ -671,7 +671,19 @@ def create_app():
         os.environ.get('USERSERVICE_API_ADDR'))
     app.config["CONTACTS_URI"] = 'http://{}/contacts'.format(
         os.environ.get('CONTACTS_API_ADDR'))
-    app.config['PUBLIC_KEY'] = open(os.environ.get('PUB_KEY_PATH'), 'r').read()
+    def _load_key(env_key, path_key):
+        key = os.getenv(env_key)
+        if key:
+            return key.replace("\\n", "\n")
+        path = os.getenv(path_key)
+        if not path:
+            raise RuntimeError(
+                "JWT_PUBLIC_KEY or PUB_KEY_PATH must be set for JWT validation"
+            )
+        with open(path, "r") as key_file:
+            return key_file.read()
+
+    app.config['PUBLIC_KEY'] = _load_key("JWT_PUBLIC_KEY", "PUB_KEY_PATH")
     app.config['LOCAL_ROUTING'] = os.getenv('LOCAL_ROUTING_NUM')
     # timeout in seconds for calls to the backend
     app.config['BACKEND_TIMEOUT'] = int(os.getenv('BACKEND_TIMEOUT', '4'))

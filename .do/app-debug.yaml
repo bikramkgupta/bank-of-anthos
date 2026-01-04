@@ -1,0 +1,46 @@
+name: bank-of-anthos-debug
+region: syd1
+workers:
+  - name: debug
+    image:
+      registry_type: DOCKER_HUB
+      registry: ""
+      repository: postgres
+      tag: "18"
+    run_command: "sleep infinity"
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: ACCOUNTS_DB_URI
+        value: postgresql://${accountsdb.USER}:${accountsdb.PASSWORD}@${accountsdb.HOST}:${accountsdb.PORT}/accountsdb?sslmode=require
+        scope: RUN_TIME
+      - key: LEDGER_DB_URI
+        value: postgresql://${ledgerdb.USER}:${ledgerdb.PASSWORD}@${ledgerdb.HOST}:${ledgerdb.PORT}/ledgerdb?sslmode=require
+        scope: RUN_TIME
+      - key: JWT_PRIVATE_KEY
+        value: REPLACE_ME
+        type: SECRET
+        scope: RUN_TIME
+      - key: JWT_PUBLIC_KEY
+        value: REPLACE_ME
+        type: SECRET
+        scope: RUN_TIME
+databases:
+  - name: accountsdb
+    engine: PG
+    version: "15"
+    size: db-s-dev-database
+    num_nodes: 1
+    production: true
+    cluster_name: boa-staging-postgres
+    db_name: accountsdb
+    db_user: accounts_user
+  - name: ledgerdb
+    engine: PG
+    version: "15"
+    size: db-s-dev-database
+    num_nodes: 1
+    production: true
+    cluster_name: boa-staging-postgres
+    db_name: ledgerdb
+    db_user: ledger_user

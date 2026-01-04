@@ -1,0 +1,59 @@
+name: Deploy to DigitalOcean App Platform (Staging)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APP_NAME: ${{ vars.APP_NAME || 'bank-of-anthos-staging' }}
+  APP_REGION: ${{ vars.APP_REGION || 'syd1' }}
+  GITHUB_REPO: ${{ github.repository }}
+  GITHUB_BRANCH: ${{ github.ref_name || 'main' }}
+  ACCOUNTS_DB_NAME: ${{ vars.ACCOUNTS_DB_NAME || 'accountsdb' }}
+  LEDGER_DB_NAME: ${{ vars.LEDGER_DB_NAME || 'ledgerdb' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Render app spec
+        env:
+          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+          APP_NAME: ${{ env.APP_NAME }}
+          APP_REGION: ${{ env.APP_REGION }}
+          GITHUB_REPO: ${{ env.GITHUB_REPO }}
+          GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
+          ACCOUNTS_DB_NAME: ${{ env.ACCOUNTS_DB_NAME }}
+          LEDGER_DB_NAME: ${{ env.LEDGER_DB_NAME }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          template = Path(".do/deploy.template.yaml").read_text()
+          pattern = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+
+          def replacer(match: re.Match) -> str:
+            key = match.group(1)
+            return os.environ.get(key, match.group(0))
+
+          rendered = pattern.sub(replacer, template)
+          Path(".do/deploy.yaml").write_text(rendered)
+          PY
+
+      - name: Deploy to App Platform
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          project_id: ${{ vars.DO_PROJECT_ID }}
+          app_spec_path: .do/deploy.yaml
