@@ -186,6 +186,12 @@ services:
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
         scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+        value: "3"
+        scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+        value: "1"
+        scope: RUN_TIME
       - key: BALANCES_API_ADDR
         value: balancereader:8080
         scope: RUN_TIME
@@ -240,6 +246,12 @@ services:
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
         scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+        value: "3"
+        scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+        value: "1"
+        scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
         scope: RUN_TIME
@@ -290,6 +302,12 @@ services:
         scope: RUN_TIME
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${ledgerdb.PASSWORD}
+        scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+        value: "3"
+        scope: RUN_TIME
+      - key: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+        value: "1"
         scope: RUN_TIME
       - key: LOCAL_ROUTING_NUM
         value: "883745000"
