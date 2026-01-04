@@ -9,7 +9,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/frontend
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/frontend/Dockerfile
     http_port: 8080
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -51,7 +51,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/accounts/userservice
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/accounts/userservice/Dockerfile
     internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -100,7 +100,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/accounts/contacts
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/accounts/contacts/Dockerfile
     internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -145,7 +145,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/ledger/ledgerwriter
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/ledger/ledgerwriter/Dockerfile
     internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -196,7 +196,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/ledger/balancereader
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/ledger/balancereader/Dockerfile
     internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -244,7 +244,7 @@ services:
       branch: main
       deploy_on_push: false
     source_dir: src/ledger/transactionhistory
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/ledger/transactionhistory/Dockerfile
     internal_ports: [8080]
     instance_count: 1
     instance_size_slug: basic-xxs
@@ -293,7 +293,7 @@ workers:
       branch: main
       deploy_on_push: false
     source_dir: src/loadgenerator
-    dockerfile_path: Dockerfile
+    dockerfile_path: src/loadgenerator/Dockerfile
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:
